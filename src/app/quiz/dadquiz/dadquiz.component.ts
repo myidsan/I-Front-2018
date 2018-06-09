@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, OnInit, AfterContentChecked, Renderer2} from '@angular/core';
 import { ElementRef } from '@angular/core';
-import { SurveyResultService } from '../service/survery-result.service';
+import { SurveyResultService } from '../../service/survery-result.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  selector: 'app-dadquiz',
+  templateUrl: './dadquiz.component.html',
+  styleUrls: ['./dadquiz.component.css']
 })
-export class SurveyComponent implements OnInit, AfterViewInit, AfterContentChecked {
+export class DadquizComponent implements OnInit, AfterViewInit, AfterContentChecked {
   username  = '';
   public input: any;
   res_one = -1;
@@ -19,21 +19,21 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
 
   // mock quizzes
   // questions
-  questions = ['How would you want to spend your vacation?',
-              'Who are you at a party?',
-              'How do you want others to remember you?',
-              'If a time machine was just released, where would you go?',
-              'What is your ideal night out?',
-              'What is your style?'];
+  questions = ['How does he spend a weekend with the kids?',
+    'What’s his ideal trip?',
+    'If he went missing, where would you look for him?',
+    'Which phrase best describes him?',
+    'How does he handle emotional moments?',
+    'What do you miss most about him when he’s not there?'];
 
-  option_one = ['Enjoying a fruity drink and an ocean breeze', 'Walking through a serene garden in full bloom',
-    'Tasting exotic cuisines and decadent desserts', 'Adventuring off the grid and deep into nature'];
-  option_two = ['Fly on the wall', 'The life of the party', 'Deep converser', 'Nah, I\'d stay at home'];
-  option_three = ['Nice and friendly', 'Intelligent and wise', 'Candid and open', 'Warm and caring'];
-  option_four = ['90s', '2000s', '2010s', 'Just stay where I am'];
-  option_five = ['Clubbing', 'Kickback', 'Night in', 'Dinner and movie'];
-  option_seven = ['Simple and classic', 'Trendy and hipster', 'Casual and comfortable', 'Dress to impress'];
-  options = [this.option_one, this.option_two, this.option_three, this.option_four, this.option_five, this.option_seven];
+  option_one = ['Go to an amusement park', 'Baking',
+    'Play baseball in the yard', 'All of above and taking photos the whole time'];
+  option_two = ['Golfing or fishing with buddies', 'Visiting a museum or historic site', 'Reading a book on a beach', 'A stay-cation'];
+  option_three = ['The office', 'On the playground', 'The garage', 'Lost in the supermarket'];
+  option_four = ['Fun and friendly', 'Smooth and cool', 'Loving but biased', 'Concerned and worried'];
+  option_five = ['Burst into tears', 'Hides tears with a joke', 'Gets super sentimental', 'Strong silence'];
+  option_six = ['His smile', 'His jokes', 'his hugs', 'His cooking'];
+  options = [this.option_one, this.option_two, this.option_three, this.option_four, this.option_five, this.option_six];
 
   window_width: number;
   window_height: number;
@@ -106,7 +106,7 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
 
   // API call for card
   submit(res) {
-    this.surResult.get_card(this.res[0], this.res[1], this.res[2], this.username);
+    this.surResult.get_card(this.res[0], this.res[2], this.res[3], this.username);
     // this.router.navigate(['resultpage']);
     this.router.navigate(['result']);
   }

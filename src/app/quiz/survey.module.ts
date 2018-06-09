@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
-import { SurveyComponent } from './survey.component';
+import { SurveyComponent } from './survey/survey.component';
+import { DadquizComponent } from './dadquiz/dadquiz.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SurveyComponent } from './survey.component';
     ReactiveFormsModule,
   ],
   declarations: [
-    SurveyComponent
+    SurveyComponent,
+    DadquizComponent,
   ],
   providers: [
   ]
