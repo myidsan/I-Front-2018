@@ -42,16 +42,17 @@ export class SurveyResultService {
   }
 
   // new get_card
-  get_card(res_one: number, res_two: number, res_three: number, username: string): Observable<any> {
+  get_card(res_one: string, res_two: string, res_three: string, username: string, quizId: number): Observable<any> {
     this._card = new BehaviorSubject<ScentProfileCard>(this.card);
     // console.log('get_card accessed in service');
 
     this.username = username;
-    const cardAPI = perf_back_api + 'notbought/mode';
+    const cardAPI = perf_back_api + 'notbought/' + quizId.toString();
+    console.log(cardAPI);
     const obs = this.http.post(cardAPI, {
-      q1: this.one_options[res_one],
-      q2: this.two_options[res_two],
-      q3: this.three_options[res_three],
+      q1: res_one,
+      q2: res_two,
+      q3: res_three,
       name: username
     });
     obs.subscribe( (response: Response) => {
@@ -63,10 +64,10 @@ export class SurveyResultService {
     return this.obs_card;
   }
 
-  send_result(card_result: any, email: string) {
+  send_result(card_result: any, email: string, quizId: number) {
     console.log('sending the result of bought to db');
     const result = card_result;
-    const boughtAPI = perf_back_api + 'bought/mode';
+    const boughtAPI = perf_back_api + 'bought/' + quizId.toString();
     const obs = this.http.post(boughtAPI, {
       q1: result[0].name,
       q2: result[1].name,

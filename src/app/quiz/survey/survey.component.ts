@@ -16,6 +16,7 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
   res_three = -1;
   res = [];
   slideIndex = 1;
+  quizId = 0;
 
   // mock quizzes
   // questions
@@ -34,6 +35,10 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
   option_five = ['Clubbing', 'Kickback', 'Night in', 'Dinner and movie'];
   option_seven = ['Simple and classic', 'Trendy and hipster', 'Casual and comfortable', 'Dress to impress'];
   options = [this.option_one, this.option_two, this.option_three, this.option_four, this.option_five, this.option_seven];
+
+  private one_options = ['Dreamer', 'Charmer', 'Daredevil', 'Navigator'];
+  private two_options = ['Observer', 'Enthusiast', 'Giver', 'Innovator'];
+  private three_options = ['Creator', 'Architect', 'Achiever', 'Mediator'];
 
   window_width: number;
   window_height: number;
@@ -99,14 +104,14 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
 
   // img src onerror handler
   imgerrorhandler(event, card, type) {
-    event.target.src = '../assets/img_survey/cards/1/1.jpg';
+    event.target.src = '../assets/img_survey_host/cards/main/0/0.png';
     // need to fix
     // event.target.src = '../assets/img_survey/cards/' + `${card}` + '/' + `${type}` + '/' + '.jpg';
   }
 
   // API call for card
   submit(res) {
-    this.surResult.get_card(this.res[0], this.res[1], this.res[2], this.username);
+    this.surResult.get_card(this.one_options[this.res[0]], this.two_options[this.res[1]], this.three_options[this.res[2]], this.username, this.quizId);
     // this.router.navigate(['resultpage']);
     this.router.navigate(['result']);
   }

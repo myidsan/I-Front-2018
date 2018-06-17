@@ -16,6 +16,7 @@ export class DadquizComponent implements OnInit, AfterViewInit, AfterContentChec
   res_three = -1;
   res = [];
   slideIndex = 1;
+  quizId = 1;
 
   // mock quizzes
   // questions
@@ -32,8 +33,12 @@ export class DadquizComponent implements OnInit, AfterViewInit, AfterContentChec
   option_three = ['The office', 'On the playground', 'The garage', 'Lost in the supermarket'];
   option_four = ['Fun and friendly', 'Smooth and cool', 'Loving but biased', 'Concerned and worried'];
   option_five = ['Burst into tears', 'Hides tears with a joke', 'Gets super sentimental', 'Strong silence'];
-  option_six = ['His smile', 'His jokes', 'his hugs', 'His cooking'];
+  option_six = ['His smile', 'His jokes', 'His hugs', 'His cooking'];
   options = [this.option_one, this.option_two, this.option_three, this.option_four, this.option_five, this.option_six];
+
+  private one_options = ['Big Kid', 'Manny', 'Coach', 'Photographer'];
+  private two_options = ['Provider', 'Jokester', 'Handyman', 'Wanderer'];
+  private three_options = ['SuperDad', 'Cool Dad', 'Bragger Dad', 'Heli-pop-ter'];
 
   window_width: number;
   window_height: number;
@@ -99,14 +104,15 @@ export class DadquizComponent implements OnInit, AfterViewInit, AfterContentChec
 
   // img src onerror handler
   imgerrorhandler(event, card, type) {
-    event.target.src = '../assets/img_survey/cards/1/1.jpg';
+    event.target.src = '../assets/img_survey_host/cards/dad/0/0.png';
     // need to fix
     // event.target.src = '../assets/img_survey/cards/' + `${card}` + '/' + `${type}` + '/' + '.jpg';
   }
 
   // API call for card
   submit(res) {
-    this.surResult.get_card(this.res[0], this.res[2], this.res[3], this.username);
+    this.surResult.get_card(this.one_options[this.res[0]], this.two_options[this.res[2]], this.three_options[this.res[3]],
+                            this.username, this.quizId);
     // this.router.navigate(['resultpage']);
     this.router.navigate(['result']);
   }

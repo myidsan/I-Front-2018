@@ -1,13 +1,14 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ScentProfileCard } from './model/profile-card';
-import { SurveyComponent } from './survey/survey.component';
+import { SurveyComponent } from './quiz/survey/survey.component';
 import { ResultComponent } from './result/result.component';
+import { DadquizComponent } from './quiz/dadquiz/dadquiz.component';
 
 export const router: Routes = [
   { path: '', redirectTo: 'survey', pathMatch: 'full'},
   { path: 'survey', component: SurveyComponent },
+  { path: 'dad', component: DadquizComponent },
   { path: 'result', component: ResultComponent}
 ]
 

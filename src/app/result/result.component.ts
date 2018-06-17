@@ -24,6 +24,7 @@ export class ResultComponent implements OnInit, AfterContentChecked, AfterViewIn
   window_width: number;
   window_height: number;
   public name: string;
+  quizId = 1;
 
   constructor(public surService: SurveyResultService,
               public render: Renderer2,
@@ -55,7 +56,7 @@ export class ResultComponent implements OnInit, AfterContentChecked, AfterViewIn
 
   goto_purchase() {
     if (!this.userEmail.hasError('email')) {
-      this.surService.send_result(this.result_cards, this.userEmail.value);
+      this.surService.send_result(this.result_cards, this.userEmail.value, this.quizId);
     } else {
       document.getElementById('email_area').focus();
     }
@@ -83,6 +84,9 @@ export class ResultComponent implements OnInit, AfterContentChecked, AfterViewIn
     document.getElementById('card_desc_' + i).innerHTML = this.result_cards[i].description.split('/')[0];
     document.getElementById('card_desc_italicize_' + i).style.opacity = '1';
     document.getElementById('card_desc_italicize_' + i).innerHTML = this.result_cards[i].description.split('/')[1];
+      if (this.result_cards[i].description.split('/')[1] === undefined) {
+        document.getElementById('card_desc_italicize_' + i).innerHTML = '';
+      }
     this.button_checker[i] = true;
   }
 
