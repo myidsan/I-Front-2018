@@ -14,7 +14,7 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
   res_one = -1;
   res_two = -1;
   res_three = -1;
-  res = [];
+  res = [null, null, null, null, null, null];
   slideIndex = 1;
   quizId = 0;
 
@@ -49,20 +49,28 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
               private render: Renderer2) { }
 
   register(i) {
-    if (this.res[this.slideIndex - 1] !== undefined) {
-      console.log('not null');
-      this.res[this.slideIndex - 1] = i;
-    } else {
-      this.res.push(i);
-    }
+    this.res[this.slideIndex - 1] = i;
+    console.log(this.res);
 
-    if (this.res.length >= this.questions.length) {
+    const emptyIdx = this.res.indexOf(null);
+    console.log('empty is:' + emptyIdx);
+    console.log('idx is: ' + this.slideIndex);
+    if (emptyIdx === this.slideIndex) {
+      this.plusSlides(1);
+    } else {
+      console.log('empty real is:' + emptyIdx);
+      // todo
+      // auto nav to unanswered questions
+      // why is this line not working
+      this.slideIndex = emptyIdx + 1;
+      this.showSlides(emptyIdx + 1);
+    }
+    if (this.res.length >= this.questions.length && !this.res.includes(null)) {
       this.submit(this.res);
     }
-    this.plusSlides(1);
   }
 
-  showSlides(n?) {
+  showSlides(n) {
     let i;
     const slides = document.getElementsByClassName('slides');
     const dots = document.getElementsByClassName('dot');
@@ -117,7 +125,7 @@ export class SurveyComponent implements OnInit, AfterViewInit, AfterContentCheck
   }
 
   ngAfterViewInit() {
-    this.showSlides();
+    this.showSlides(1);
     this.input.addEventListener('keyup', function(event) {
       event.preventDefault();
       if (event.keyCode === 13) {
