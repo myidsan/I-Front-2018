@@ -47,13 +47,13 @@ export class SurveyResultService {
     // console.log('get_card accessed in service');
 
     this.username = username;
-    const cardAPI = perf_back_api + 'notbought/' + quizId.toString();
+    const cardAPI = perf_back_api + 'bought/' + quizId.toString();
     console.log(cardAPI);
-    const obs = this.http.post(cardAPI, {
+    const obs = this.http.put(cardAPI, {
       q1: res_one,
       q2: res_two,
       q3: res_three,
-      name: username
+      // name: username
     });
     obs.subscribe( (response: Response) => {
       const response_data = response['response']['Cards'];
